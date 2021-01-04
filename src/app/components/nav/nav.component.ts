@@ -14,7 +14,6 @@ export class NavComponent implements OnInit {
   }
 
   handleClick(e): void {
-    var likeButtonElement = e.target as HTMLElement;
     var id = e.target.id;
     console.log(id);
     navigateToUrl("/"+id);

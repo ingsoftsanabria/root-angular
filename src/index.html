@@ -10,9 +10,9 @@
   <script type="systemjs-importmap">
     {
       "imports": {
-        "@app-angular": "http://localhost:4300/main.js",
+        "micro-angular": "http://localhost:4300/main.js",
         "footer": "http://localhost:4201/main.js",
-        "dashboard": "http://localhost:4202/main.js",
+        "micro-dashboard": "http://localhost:4202/main.js",
         "single-spa": "https://cdnjs.cloudflare.com/ajax/libs/single-spa/4.3.5/system/single-spa.min.js"
       }
     }
@@ -31,24 +31,24 @@
   <script>
     System.import('single-spa').then(function (singleSpa) {
       singleSpa.registerApplication(
-        '@app-angular',
+        'micro-angular',
         function () {
-          return System.import('@app-angular');
+          return System.import('micro-angular');
         },
         function (location) {
-          return location.pathname.startsWith('/angular');
+          return location.pathname.startsWith('/pages');
           //return true;
         }
       )
 
       singleSpa.registerApplication(
-          'dashboard',
+          'micro-dashboard',
           function () {
-            return System.import('dashboard');
+            return System.import('micro-dashboard');
           },
           function (location) {
-            // return location.pathname.startsWith('/app2');
-            return true;
+            return location.pathname.startsWith('/dash');
+            //return true;
           }
         )
 

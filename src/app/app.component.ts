@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LifeCycles, registerApplication, start } from "single-spa";
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root-config',
@@ -12,7 +13,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     registerApplication({
       name: "micro-angular",
-      app: (): Promise<LifeCycles> => (window as any).System.import("http://localhost:4300/main.js"),
+      app: (): Promise<LifeCycles> => (window as any).System.import(environment.production ? "http://localhost:5000/micro-angular/main.js" : "http://localhost:4300/main.js"),
       activeWhen: "/pages",
       customProps: {
         some: 'value'
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit {
 
     registerApplication({
       name: "micro-dashboard",
-      app: (): Promise<LifeCycles> => (window as any).System.import("http://localhost:4202/main.js"),
+      app: (): Promise<LifeCycles> => (window as any).System.import(environment.production ? "http://localhost:5000/micro-dashboard/main.js" : "http://localhost:4202/main.js"),
       activeWhen: "/dash",
       customProps: {
         some: 'value',
@@ -31,7 +32,7 @@ export class AppComponent implements OnInit {
 
     registerApplication({
       name: "micro-footer",
-      app: (): Promise<LifeCycles> => (window as any).System.import("http://localhost:4203/main.js"),
+      app: (): Promise<LifeCycles> => (window as any).System.import(environment.production ? "http://localhost:5000/micro-footer/main.js" : "http://localhost:4203/main.js"),
       activeWhen: "/",
     });
     
